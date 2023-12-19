@@ -64,6 +64,7 @@ CREATE TABLE Bill
 )
 GO 
 
+
 EXEC sp_RENAME 'Bill.timePayment', 'datePayment', 'COLUMN';
 ALTER TABLE Bill
 ALTER COLUMN datePayment DATE;
@@ -80,6 +81,7 @@ CREATE TABLE BillInfo
 
 )
 GO
+
 CREATE TABLE Cutomer
 (
 	phoneNumber NVARCHAR(100) PRIMARY KEY,
@@ -92,7 +94,7 @@ GO
 ALTER TABLE Bill
 ADD FOREIGN KEY (customer) REFERENCES dbo.Customer(phoneNumber)
 
-CREATE PROC USP_Login -- lấy ds account
+CREATE PROC USP_Login
 @userName NVARCHAR(100), @passWord NVARCHAR(100)
 AS
 BEGIN
@@ -100,11 +102,17 @@ BEGIN
 END 
 GO
 
+CREATE PROC USP_Login -- lấy ds account
+CREATE PROC USP_GetTableList
+AS SELECT * FROM dbo.TableFood
+GO
+
 CREATE PROC USP_GetTableList -- lấy ds bàn
 AS SELECT * FROM dbo.TableFood
 GO
 
 CREATE PROC USP_GetTableListByLocation -- lọc ds bàn theo vị trí
+CREATE PROC USP_GetTableListByLocation
 @location NVARCHAR(100)
 AS
 BEGIN 
